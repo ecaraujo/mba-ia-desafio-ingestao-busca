@@ -23,7 +23,14 @@ PERGUNTA DO USUÁRIO:
 {pergunta}
 
 RESPONDA A "PERGUNTA DO USUÁRIO"
-"""
+""".strip()
 
-def search_prompt(question=None):
-    pass
+
+def search_prompt(question: str, contexto: str) -> str:
+    if not question or not str(question).strip():
+        raise ValueError("question must be a non-empty string")
+
+    return PROMPT_TEMPLATE.format(
+        contexto=(contexto or "").strip(),
+        pergunta=str(question).strip(),
+    )
